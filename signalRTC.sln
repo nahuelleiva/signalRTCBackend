@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "signalRTC", "signalRTC.csproj", "{EDE650AB-DEAF-4A6B-A5DF-479809452BB5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDE650AB-DEAF-4A6B-A5DF-479809452BB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE650AB-DEAF-4A6B-A5DF-479809452BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE650AB-DEAF-4A6B-A5DF-479809452BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE650AB-DEAF-4A6B-A5DF-479809452BB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC0A0387-1E40-4268-A167-17F1B0F93D29}
+	EndGlobalSection
+EndGlobal
