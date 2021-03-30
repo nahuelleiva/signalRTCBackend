@@ -1,20 +1,33 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using signalRTC.hubs;
+using SignalRTC.Hubs;
 
-namespace signalRTC
+namespace SignalRTC
 {
-    class Startup
+    public class Startup
     {
+
+        readonly string MyAllowSpecificOrigins = "AllowOrigins";
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
-                    builder => builder.WithOrigins("http://localhost:8100", "https://localhost:8100")
+                    builder => builder.WithOrigins(Configuration.GetValue<string>("AllowOrigins").Split(','))
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
@@ -22,8 +35,6 @@ namespace signalRTC
 
             services.AddSignalR();
         }
-
-        readonly string MyAllowSpecificOrigins = "AllowOrigins";
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -33,16 +44,18 @@ namespace signalRTC
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
+
             app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapHub<SignalRtcHub>("/signalrtc");
-            });
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
             });
         }
     }

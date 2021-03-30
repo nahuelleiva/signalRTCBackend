@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
+﻿using Microsoft.AspNetCore.SignalR;
+using SignalRTC.Models;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR;
-using signalRTC.models;
 
-namespace signalRTC.hubs
+namespace SignalRTC.Hubs
 {
-    class SignalRtcHub : Hub
+    public class SignalRtcHub : Hub
     {
         public async Task NewUser(string username)
         {
